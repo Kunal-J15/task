@@ -17,16 +17,16 @@ item.style.color = "green";
 // let title = document.getElementsByClassName("container")[0];
 // title.innerHTML = "<h1>This is Title</h1>";
 
-let li2 = document.querySelector("li:nth-child(2)");
-let li3 = document.querySelector("li:nth-child(3)");
-li2.style.backgroundColor = "green";
-li3.style.display = "none";
+// let li2 = document.querySelector("li:nth-child(2)");
+// let li3 = document.querySelector("li:nth-child(3)");
+// li2.style.backgroundColor = "green";
+// li3.style.display = "none";
 
-// let lis = document.querySelectorAll("#items .list-group-item");
-
-// for(let li of lis){
-//     li.style.fontWeight = "bold";
-// }
+let lis = document.querySelectorAll("#items .list-group-item");
+lis[2].style.color="green";
+for(let li=1;li<lis.length;li+=2){
+    lis[li].style.backgroundColor = "green";
+}
 
 // let newLi = document.createElement("li");
 // newLi.innerText = "Item 5";
