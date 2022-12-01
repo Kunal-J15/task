@@ -22,3 +22,12 @@ lis[2].style.backgroundColor = "green";
 for(let li of lis){
     li.style.fontWeight = "bold";
 }
+
+let newLi = document.createElement("li");
+newLi.innerText = "Item 5";
+lis[0].parentElement.append(newLi);
+
+let lis2 = document.getElementsByTagName("li");
+for(let li of lis2){
+    li.style.backgroundColor = "lightgrey";
+}
