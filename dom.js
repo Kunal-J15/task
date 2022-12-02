@@ -124,7 +124,7 @@ function filterItems(e){
   // Convert to an array
   Array.from(items).forEach(function(item){
     var itemName = item.firstChild.textContent;
-    itemName += item.firstChild.nextSibling.textContent;
+    itemName += " "+item.firstChild.nextSibling.textContent;
     if(itemName.toLowerCase().indexOf(text) != -1 || text.trim()==""){
       item.style.display = 'block';
     } else {
