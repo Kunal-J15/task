@@ -1,18 +1,18 @@
-console.dir(document);
-console.log(document.title);
-document.title = 123;
-console.log(document.title);
-console.log(document.head);
-console.log(document.body);
-console.log(document.all);
-console.log(document.forms);
-console.log(document.links);
-console.log(document.images);
-let head = document.querySelector("#main-header");
-head.style.border = "solid 3px #000";
-let item = document.querySelector("#main .title");
-item.style.fontWeight = "bold";
-item.style.color = "green";
+// console.dir(document);
+// console.log(document.title);
+// document.title = 123;
+// console.log(document.title);
+// console.log(document.head);
+// console.log(document.body);
+// console.log(document.all);
+// console.log(document.forms);
+// console.log(document.links);
+// console.log(document.images);
+// let head = document.querySelector("#main-header");
+// head.style.border = "solid 3px #000";
+// let item = document.querySelector("#main .title");
+// item.style.fontWeight = "bold";
+// item.style.color = "green";
 
 // let title = document.getElementsByClassName("container")[0];
 // title.innerHTML = "<h1>This is Title</h1>";
@@ -39,8 +39,8 @@ item.style.color = "green";
 
 // ...........traversing the DOM.............
 //parentNode
-let ul = document.querySelector("#items");
-ul.parentNode.style.backgroundColor= "gray";
+// let ul = document.querySelector("#items");
+// ul.parentNode.style.backgroundColor= "gray";
 //childNodes
 //childElements
 //firstChild
@@ -58,14 +58,14 @@ ul.parentNode.style.backgroundColor= "gray";
     //setAttribute("title","val")
 
 //    1. Now go head and add HEllo word before Item Lister
-let text = document.createTextNode("HEllo word");
-let container = document.querySelector(".container");
-let h1 = document.querySelector("#header-title");
-container.insertBefore(text,h1)
+// let text = document.createTextNode("HEllo word");
+// let container = document.querySelector(".container");
+// let h1 = document.querySelector("#header-title");
+// container.insertBefore(text,h1)
 
-//    2. Now go head and add HEllo word before Item 1 If stuck for long check the hints.
-let text2 = document.createTextNode("HEllo word");
-ul.insertBefore(text2,ul.firstElementChild);
+//    2. Now go head and add HEllo word before Item 1
+// let text2 = document.createTextNode("HEllo word");
+// ul.insertBefore(text2,ul.firstElementChild);
 /*parentElement
 lastelementchild
 lastchild
@@ -80,3 +80,78 @@ createelement
 setAttribute
 createtesxtnode
 appendchild*/
+
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
+
+// Form submit event
+form.addEventListener('submit', addItem);
+// Delete event
+itemList.addEventListener('click', removeItem);
+// Filter event
+filter.addEventListener('keypress', filterItems);
+
+// Add item
+function addItem(e){
+  e.preventDefault();
+  let newItem = document.getElementById('item').value;
+  append(newItem);
+}
+
+// Remove item
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      let li = e.target.parentElement;
+      itemList.removeChild(li);
+    }
+  }else  if(e.target.classList.contains('edit')){
+    let li = e.target.parentElement;
+    li.innerHTML = `<form id="editForm" class="form-inline mb-3"> <input type="text" class="form-control mr-2" value=${li.firstChild.textContent}> <input type="submit" class="btn btn-dark" value="Submit"></form>`;
+    let editForm = document.getElementById('editForm');
+    editForm.addEventListener("submit",edit);
+    }
+}
+
+// Filter Items
+function filterItems(e){
+  // convert text to lowercase
+  var text = e.target.value.toLowerCase();
+  // Get lis
+  var items = itemList.getElementsByTagName('li');
+  // Convert to an array
+  Array.from(items).forEach(function(item){
+    var itemName = item.firstChild.textContent;
+    console.log(itemName);
+    if(itemName.toLowerCase().indexOf(text) != -1){
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+function edit(e){
+    e.preventDefault();
+    let val = e.target.firstElementChild.value;
+    e.target.parentElement.remove();
+    append(val);
+
+}
+function append(newItem){
+    var li = document.createElement('li');
+    li.className = 'list-group-item';
+    li.appendChild(document.createTextNode(newItem));
+   
+    var deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn btn-danger btn-sm float-right delete ml-2';
+    deleteBtn.appendChild(document.createTextNode('X'));
+    li.appendChild(deleteBtn); 
+  
+    var eBtn = document.createElement('button');
+    eBtn.className = 'btn btn-warning btn-sm float-right edit';
+    eBtn.appendChild(document.createTextNode('Edit'));
+    li.appendChild(eBtn);
+    itemList.appendChild(li);
+}
