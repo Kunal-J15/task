@@ -96,7 +96,8 @@ filter.addEventListener('input', filterItems);
 function addItem(e){
   e.preventDefault();
   let newItem = document.getElementById('item').value;
-  append(newItem);
+  let des = document.getElementById('des').value;
+  append(newItem,des);
 }
 
 // Remove item
@@ -108,7 +109,7 @@ function removeItem(e){
     }
   }else  if(e.target.classList.contains('edit')){
     let li = e.target.parentElement;
-    li.innerHTML = `<form id="editForm" class="form-inline mb-3"> <input type="text" class="form-control mr-2" value=${li.firstChild.textContent}> <input type="submit" class="btn btn-dark" value="Submit"></form>`;
+    li.innerHTML = `<form id="editForm" class="form-inline mb-3"> <input type="text" class="form-control mr-2" value=${li.firstChild.textContent}><input type="text" class="form-control mr-2" value=${li.firstChild.nextSibling.textContent}> <input type="submit" class="btn btn-dark" value="Submit"></form>`;
     let editForm = document.getElementById('editForm');
     editForm.addEventListener("submit",edit);
     }
@@ -123,7 +124,7 @@ function filterItems(e){
   // Convert to an array
   Array.from(items).forEach(function(item){
     var itemName = item.firstChild.textContent;
-    console.log(itemName);
+    itemName += item.firstChild.nextSibling.textContent;
     if(itemName.toLowerCase().indexOf(text) != -1 || text.trim()==""){
       item.style.display = 'block';
     } else {
@@ -135,14 +136,16 @@ function filterItems(e){
 function edit(e){
     e.preventDefault();
     let val = e.target.firstElementChild.value;
+    let des = e.target.firstElementChild.nextSibling.value;
     e.target.parentElement.remove();
-    append(val);
+    append(val,des);
 
 }
-function append(newItem){
+function append(newItem,des){
     var li = document.createElement('li');
     li.className = 'list-group-item';
-    li.appendChild(document.createTextNode(newItem));
+    li.appendChild(document.createTextNode(newItem+" "));
+    li.appendChild(document.createTextNode(des));
    
     var deleteBtn = document.createElement('button');
     deleteBtn.className = 'btn btn-danger btn-sm float-right delete ml-2';
