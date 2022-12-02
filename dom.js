@@ -90,7 +90,7 @@ form.addEventListener('submit', addItem);
 // Delete event
 itemList.addEventListener('click', removeItem);
 // Filter event
-filter.addEventListener('keypress', filterItems);
+filter.addEventListener('input', filterItems);
 
 // Add item
 function addItem(e){
@@ -124,7 +124,7 @@ function filterItems(e){
   Array.from(items).forEach(function(item){
     var itemName = item.firstChild.textContent;
     console.log(itemName);
-    if(itemName.toLowerCase().indexOf(text) != -1){
+    if(itemName.toLowerCase().indexOf(text) != -1 || text.trim()==""){
       item.style.display = 'block';
     } else {
       item.style.display = 'none';
