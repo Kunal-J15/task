@@ -39,3 +39,11 @@ students.push(s1,s2,s3,s4,s5);
 for (const std of students) {
   if(std.eligibleForPlacements(60)(18)) console.log(std.name)
 }
+
+setTimeout(()=>{console.log("1")},1000);
+setTimeout(()=>{console.log("2")},0);
+function x(y){
+    console.log("3");
+    y();}
+x(function (){setTimeout(()=>{console.log("4")},0)});
+
