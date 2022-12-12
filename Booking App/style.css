@@ -1,8 +1,8 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -13,7 +13,7 @@ ul {
   list-style: none;
 }
 
-ul li {
+ul{
   padding: 5px;
   background: #f4f4f4;
   margin: 5px 0;
@@ -41,7 +41,7 @@ header {
   display: block;
 }
 
-#my-form input[type='text'] {
+#my-form input {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -67,4 +67,8 @@ header {
 .bg-dark {
   background: #333;
   color: #fff;
+}
+button.edit button.delete {
+margin-right: 1rem;
+background-color: black;
 }
