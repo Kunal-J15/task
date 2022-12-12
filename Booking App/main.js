@@ -4,21 +4,15 @@ const email = document.querySelector("#email");
 const phone =  document.querySelector("#phone");
 const ul = document.querySelector("ul");
 const msg = document.querySelector(".msg");
-
 const baseUrl="https://crudcrud.com/api/3ce54d80807240d5b46e90395794d80d/data/"
-// from old version store by name
-// let entries = Object.entries(localStorage);
-// for(let e of entries){
-//   let li = document.createElement("li");
-//      li.textContent = `${e[0]}: ${e[1]}`
-//      ul.appendChild(li);
-// }
+
 async function loadData() {
   ul.innerHTML="";
   let entries = await axios.get(baseUrl);
   entries = entries.data;
   console.log(entries);
 for(let e of entries) createLi(e.name,e.email,e.phone,e._id);
+removeListner();
 addListner();
 }
 loadData();
@@ -38,21 +32,6 @@ async function deleteLi(e){
 }
 
 form.addEventListener("submit",onsubmit);
-
-name.addEventListener("mouseover",(e)=>{
-  name.style.backgroundColor = "lightGrey";})
-//
-name.addEventListener("mouseout",(e)=>{
-  name.style.backgroundColor = "white";
-})
-
-email.addEventListener("mouseover",(e)=>{
-  email.style.backgroundColor = "lightGreen";
- })
-//
-email.addEventListener("mouseout",(e)=>{
-  email.style.backgroundColor = "white";
-})
 
 function createLi(name,email,phone,id){
   let li = document.createElement("li");
